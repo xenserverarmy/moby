@@ -155,7 +155,7 @@ handle_single_manifest_v2() {
 					continue
 				fi
 				local token="$(curl -fsSL "$authBase/token?service=$authService&scope=repository:$image:pull" | jq --raw-output '.token')"
-				fetch_blob "$token" "$image" "$layerDigest" "$dir/$layerTar" --progress
+				fetch_blob "$token" "$image" "$layerDigest" "$dir/$layerTar" --silent
 				;;
 
 			*)
@@ -299,7 +299,7 @@ while [ $# -gt 0 ]; do
 					continue
 				fi
 				token="$(curl -fsSL "$authBase/token?service=$authService&scope=repository:$image:pull" | jq --raw-output '.token')"
-				fetch_blob "$token" "$image" "$imageLayer" "$dir/$layerId/layer.tar" --silent
+				fetch_blob "$token" "$image" "$imageLayer" "$dir/$layerId/layer.tar" --progress
 			done
 			;;
 
